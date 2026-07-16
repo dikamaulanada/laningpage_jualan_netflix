@@ -109,6 +109,100 @@
             line-height: 1.6;
         }
 
+
+        /* Free Trial */
+
+        .free-trial {
+            margin-bottom: 16px;
+            padding: 20px;
+            border: 1px solid #ffffff;
+            border-radius: 20px;
+            color: #fdfcfc;
+            background: #000000;
+        }
+
+        .free-trial-badge {
+            display: inline-block;
+            margin-bottom: 13px;
+            padding: 6px 9px;
+            border-radius: 5px;
+            color: #000000;
+            background: #ffffff;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.3px;
+        }
+
+        .free-trial h2 {
+            margin-bottom: 8px;
+            font-size: 24px;
+            line-height: 1.2;
+            letter-spacing: -0.6px;
+        }
+
+        .free-trial > p {
+            color: #ffffff;;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .trial-benefits {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0;
+            margin: 15px 0;
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .trial-benefits span {
+            padding: 0;
+            color: inherit;
+            background: transparent;
+        }
+
+        .trial-benefits span + span::before {
+            content: "•";
+            margin: 0 8px;
+            color: #a3a3a3;
+        }
+
+        .trial-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            min-height: 50px;
+            border: 1px solid #171717;
+            border-radius: 12px;
+            color: #000000;
+            background: #ffffff;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 800;
+            transition:s
+                transform 0.15s ease,
+                opacity 0.15s ease;
+        }
+
+        .trial-button:hover {
+            opacity: 0.88;
+        }
+
+        .trial-button:active {
+            transform: scale(0.98);
+        }
+
+        .trial-note {
+            margin-top: 10px;
+            color: #000000 !important;
+            text-align: center;
+            font-size: 10px !important;
+            line-height: 1.45 !important;
+        }
+
         /* Pilihan paket cepat */
 
         .quick-select {
@@ -715,6 +809,38 @@
             </p>
         </header>
 
+
+        <section class="free-trial" aria-labelledby="free-trial-title">
+            <span class="free-trial-badge">GRATIS · KUOTA TERBATAS</span>
+
+            <h2 id="free-trial-title">Coba gratis selama 2 hari.</h2>
+
+            <p>
+                Masih ragu memilih paket? Klaim akses trial terlebih dahulu
+                dan hubungi admin langsung melalui WhatsApp.
+            </p>
+
+            <div class="trial-benefits" aria-label="Keuntungan free trial">
+                <span>2 hari akses</span>
+                <span>Tanpa biaya</span>
+                <span>Tanpa VPN</span>
+            </div>
+
+            <a
+                id="free-trial-link"
+                class="trial-button"
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Klaim Free Trial via WhatsApp
+            </a>
+
+            <p class="trial-note">
+                Satu orang satu kali trial. Ketersediaan mengikuti kuota dan persetujuan admin.
+            </p>
+        </section>
+
         <section class="quick-select" aria-labelledby="quick-select-title">
             <div class="quick-select-header">
                 <h2 id="quick-select-title">Pilih paket cepat</h2>
@@ -1300,6 +1426,9 @@
         const shopeeLink =
             document.getElementById("shopee-link");
 
+        const freeTrialLink =
+            document.getElementById("free-trial-link");
+
         /* ===============================
            WHATSAPP
         =============================== */
@@ -1406,6 +1535,10 @@
 
         whatsappLink.href = createWhatsAppUrl(
             "Halo Kak, saya ingin bertanya mengenai paket yang tersedia."
+        );
+
+        freeTrialLink.href = createWhatsAppUrl(
+            "Halo Kak, saya ingin klaim Free Trial 2 Hari. Apakah kuotanya masih tersedia?"
         );
 
         shopeeLink.href = storeConfig.shopee;
