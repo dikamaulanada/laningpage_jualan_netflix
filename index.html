@@ -8,11 +8,11 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Flix Wayne | Paket Streaming</title>
+    <title>Flix Wayne | Paket Streaming Netflix</title>
 
     <meta
         name="description"
-        content="Pilih paket streaming dan lakukan pembelian melalui WhatsApp atau Shopee."
+        content="Pilih paket streaming mulai dari Sharing, Private, VIP Profile, hingga Premium Account full kepemilikan."
     >
 
     <style>
@@ -109,6 +109,70 @@
             line-height: 1.6;
         }
 
+        /* Pilihan paket cepat */
+
+        .quick-select {
+            margin-bottom: 16px;
+            padding: 18px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            background: var(--card);
+        }
+
+        .quick-select-header {
+            margin-bottom: 14px;
+        }
+
+        .quick-select-header h2 {
+            margin-bottom: 5px;
+            font-size: 18px;
+            letter-spacing: -0.3px;
+        }
+
+        .quick-select-header p {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.55;
+        }
+
+        .quick-select-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .quick-option {
+            display: block;
+            padding: 13px;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            color: var(--text);
+            background: #ffffff;
+            text-decoration: none;
+            transition: transform 0.15s ease, background 0.15s ease;
+        }
+
+        .quick-option:hover {
+            background: #fafafa;
+        }
+
+        .quick-option:active {
+            transform: scale(0.98);
+        }
+
+        .quick-option strong {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 13px;
+        }
+
+        .quick-option span {
+            display: block;
+            color: var(--muted);
+            font-size: 11px;
+            line-height: 1.45;
+        }
+
         /* Package cards */
 
         .packages {
@@ -117,10 +181,32 @@
         }
 
         .package-card {
+            scroll-margin-top: 20px;
             padding: 20px;
             border: 1px solid var(--border);
             border-radius: 20px;
             background: var(--card);
+        }
+
+        .package-card.premium-account {
+            border-color: #c7d2fe;
+            background: linear-gradient(180deg, #ffffff 0%, #f8faff 100%);
+            box-shadow: 0 10px 30px rgba(17, 24, 39, 0.06);
+        }
+
+        .premium-note {
+            margin: -4px 0 15px;
+            padding: 12px 13px;
+            border: 1px solid #e0e7ff;
+            border-radius: 13px;
+            color: #374151;
+            background: #eef2ff;
+            font-size: 12px;
+            line-height: 1.55;
+        }
+
+        .premium-note strong {
+            color: var(--text);
         }
 
         .package-header {
@@ -134,6 +220,22 @@
         .package-title {
             font-size: 19px;
             font-weight: 800;
+        }
+
+        .package-name-group {
+            display: grid;
+            gap: 5px;
+        }
+
+        .package-code {
+            width: fit-content;
+            padding: 4px 8px;
+            border-radius: 999px;
+            color: #374151;
+            background: #f3f4f6;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.2px;
         }
 
         .discount {
@@ -229,6 +331,101 @@
             color: var(--muted);
             font-size: 13px;
             line-height: 1.5;
+        }
+
+
+        /* FAQ */
+
+        .faq {
+            margin-top: 16px;
+            padding: 20px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            background: var(--card);
+        }
+
+        .faq-header {
+            margin-bottom: 16px;
+        }
+
+        .faq-header h2 {
+            margin-bottom: 6px;
+            font-size: 19px;
+            letter-spacing: -0.3px;
+        }
+
+        .faq-header p {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .faq-list {
+            display: grid;
+            gap: 10px;
+        }
+
+        .faq-item {
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: #ffffff;
+        }
+
+        .faq-item summary {
+            position: relative;
+            padding: 15px 46px 15px 15px;
+            font-size: 14px;
+            font-weight: 800;
+            line-height: 1.45;
+            list-style: none;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .faq-item summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .faq-item summary::after {
+            content: "+";
+            position: absolute;
+            top: 50%;
+            right: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            color: #525252;
+            background: #f3f4f6;
+            font-size: 18px;
+            font-weight: 500;
+            transform: translateY(-50%);
+            transition: transform 0.2s ease;
+        }
+
+        .faq-item[open] summary::after {
+            transform: translateY(-50%) rotate(45deg);
+        }
+
+        .faq-answer {
+            padding: 0 15px 15px;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.65;
+        }
+
+        .faq-answer strong {
+            color: var(--text);
+        }
+
+        .faq-answer ul {
+            display: grid;
+            gap: 7px;
+            margin-top: 9px;
+            padding-left: 18px;
         }
 
         /* Footer */
@@ -466,6 +663,10 @@
         }
 
         @media (max-width: 370px) {
+            .quick-select-grid {
+                grid-template-columns: 1fr;
+            }
+
             .header h1 {
                 font-size: 28px;
             }
@@ -514,13 +715,45 @@
             </p>
         </header>
 
+        <section class="quick-select" aria-labelledby="quick-select-title">
+            <div class="quick-select-header">
+                <h2 id="quick-select-title">Pilih paket cepat</h2>
+                <p>Pilih berdasarkan perangkat dan tingkat privasi yang kamu butuhkan.</p>
+            </div>
+
+            <div class="quick-select-grid">
+                <a class="quick-option" href="#sharing">
+                    <strong>Paling hemat</strong>
+                    <span>Sharing 1P2U untuk HP atau tablet.</span>
+                </a>
+
+                <a class="quick-option" href="#private">
+                    <strong>Profil pribadi</strong>
+                    <span>Private 1P1U untuk HP, PC, atau laptop.</span>
+                </a>
+
+                <a class="quick-option" href="#vip-profile">
+                    <strong>Pilihan untuk TV</strong>
+                    <span>VIP Profile yang lebih stabil dan anti screen limit.</span>
+                </a>
+
+                <a class="quick-option" href="#premium-account">
+                    <strong>Full kepemilikan</strong>
+                    <span>1 akun penuh, 5 profil, dan hanya kamu yang menggunakannya.</span>
+                </a>
+            </div>
+        </section>
+
         <section class="packages">
 
             <!-- Sharing -->
 
-            <article class="package-card">
+            <article class="package-card" id="sharing">
                 <div class="package-header">
-                    <h2 class="package-title">Sharing</h2>
+                    <div class="package-name-group">
+                        <h2 class="package-title">Sharing</h2>
+                        <span class="package-code">1P2U · 1 Profil 2 User</span>
+                    </div>
                     <span class="discount">Diskon 60%</span>
                 </div>
 
@@ -539,7 +772,7 @@
                         <button
                             type="button"
                             class="order-button"
-                            data-product="Sharing 30 Hari"
+                            data-product="Sharing 1P2U 30 Hari"
                             data-price="Rp20.800"
                             data-shopee=""
                         >
@@ -560,7 +793,7 @@
                         <button
                             type="button"
                             class="order-button"
-                            data-product="Sharing 60 Hari"
+                            data-product="Sharing 1P2U 60 Hari"
                             data-price="Rp37.600"
                             data-shopee=""
                         >
@@ -581,7 +814,7 @@
                         <button
                             type="button"
                             class="order-button"
-                            data-product="Sharing 90 Hari"
+                            data-product="Sharing 1P2U 90 Hari"
                             data-price="Rp56.800"
                             data-shopee=""
                         >
@@ -594,9 +827,12 @@
 
             <!-- Private -->
 
-            <article class="package-card">
+            <article class="package-card" id="private">
                 <div class="package-header">
-                    <h2 class="package-title">Private</h2>
+                    <div class="package-name-group">
+                        <h2 class="package-title">Private</h2>
+                        <span class="package-code">1P1U · 1 Profil 1 User</span>
+                    </div>
                     <span class="discount">Diskon 60%</span>
                 </div>
 
@@ -615,7 +851,7 @@
                         <button
                             type="button"
                             class="order-button"
-                            data-product="Private 30 Hari"
+                            data-product="Private 1P1U 30 Hari"
                             data-price="Rp31.200"
                             data-shopee=""
                         >
@@ -636,7 +872,7 @@
                         <button
                             type="button"
                             class="order-button"
-                            data-product="Private 60 Hari"
+                            data-product="Private 1P1U 60 Hari"
                             data-price="Rp59.200"
                             data-shopee=""
                         >
@@ -657,7 +893,7 @@
                         <button
                             type="button"
                             class="order-button"
-                            data-product="Private 90 Hari"
+                            data-product="Private 1P1U 90 Hari"
                             data-price="Rp73.600"
                             data-shopee=""
                         >
@@ -670,9 +906,12 @@
 
             <!-- VIP Profile -->
 
-            <article class="package-card">
+            <article class="package-card" id="vip-profile">
                 <div class="package-header">
-                    <h2 class="package-title">VIP Profile</h2>
+                    <div class="package-name-group">
+                        <h2 class="package-title">VIP Profile</h2>
+                        <span class="package-code">1P1U Premium · Khusus TV</span>
+                    </div>
                     <span class="discount">Diskon 60%</span>
                 </div>
 
@@ -691,7 +930,7 @@
                         <button
                             type="button"
                             class="order-button"
-                            data-product="VIP Profile 30 Hari"
+                            data-product="VIP Profile 1P1U Premium 30 Hari"
                             data-price="Rp40.800"
                             data-shopee=""
                         >
@@ -712,7 +951,7 @@
                         <button
                             type="button"
                             class="order-button"
-                            data-product="VIP Profile 60 Hari"
+                            data-product="VIP Profile 1P1U Premium 60 Hari"
                             data-price="Rp69.600"
                             data-shopee=""
                         >
@@ -733,8 +972,52 @@
                         <button
                             type="button"
                             class="order-button"
-                            data-product="VIP Profile 90 Hari"
+                            data-product="VIP Profile 1P1U Premium 90 Hari"
                             data-price="Rp87.200"
+                            data-shopee=""
+                        >
+                            Pesan
+                        </button>
+                    </div>
+
+                </div>
+            </article>
+
+
+            <!-- Premium Account -->
+
+            <article class="package-card premium-account" id="premium-account">
+                <div class="package-header">
+                    <div class="package-name-group">
+                        <h2 class="package-title">Premium Account</h2>
+                        <span class="package-code">Full Kepemilikan · 5 Profil · 4K UHD</span>
+                    </div>
+                    <span class="discount">Paling Premium</span>
+                </div>
+
+                <div class="premium-note">
+                    <strong>100% full kepemilikan.</strong> Satu akun hanya digunakan oleh kamu,
+                    mendapatkan 5 profil, email dapat diganti ke email kamu, dan bergaransi
+                    selama masa aktif apabila terjadi kendala pada akun.
+                </div>
+
+                <div class="package-list">
+
+                    <div class="package-item">
+                        <div>
+                            <div class="package-duration">30 Hari</div>
+
+                            <div class="price">
+                                <span class="old-price">Rp186.000</span>
+                                <span class="new-price">Rp135.000</span>
+                            </div>
+                        </div>
+
+                        <button
+                            type="button"
+                            class="order-button"
+                            data-product="Premium Account Full Kepemilikan 5 Profil 4K UHD 30 Hari"
+                            data-price="Rp135.000"
                             data-shopee=""
                         >
                             Pesan
@@ -756,13 +1039,111 @@
             </ul>
         </section>
 
+
+        <section class="faq" aria-labelledby="faq-title">
+            <div class="faq-header">
+                <h2 id="faq-title">FAQ</h2>
+                <p>Pertanyaan yang sering ditanyakan sebelum membeli.</p>
+            </div>
+
+            <div class="faq-list">
+
+                <details class="faq-item">
+                    <summary>Apa arti 1P1U dan 1P2U?</summary>
+                    <div class="faq-answer">
+                        <strong>1P1U</strong> berarti 1 profil digunakan oleh 1 pengguna.
+                        <strong>1P2U</strong> berarti 1 profil digunakan maksimal oleh
+                        2 pengguna secara bergantian.
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Apa perbedaan Premium Account, VIP Profile, Private, dan Sharing?</summary>
+                    <div class="faq-answer">
+                        <strong>Premium Account</strong>: 100% full kepemilikan.
+                        Satu akun hanya digunakan oleh kamu, tersedia 5 profil, kualitas
+                        4K UHD, email dapat diganti ke email kamu, dan mendapatkan garansi
+                        selama masa aktif.<br><br>
+                        <strong>VIP Profile (1P1U Premium)</strong>: lebih stabil,
+                        anti screen limit, dan direkomendasikan untuk TV.<br><br>
+                        <strong>Private (1P1U)</strong>: profil pribadi untuk 1 pengguna,
+                        cocok untuk HP, PC, laptop, dan tablet.<br><br>
+                        <strong>Sharing (1P2U)</strong>: profil digunakan maksimal
+                        2 pengguna, lebih hemat, tetapi lebih rawan screen limit.
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Paket mana yang cocok untuk perangkat saya?</summary>
+                    <div class="faq-answer">
+                        Untuk akses paling lengkap dengan <strong>5 profil</strong>,
+                        pilih Premium Account. Untuk <strong>TV</strong>, pilih VIP Profile.
+                        Untuk <strong>HP, PC, laptop, atau tablet</strong>, pilih Private.
+                        Paket Sharing lebih disarankan untuk <strong>HP atau tablet</strong>.
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Boleh login di berapa perangkat?</summary>
+                    <div class="faq-answer">
+                        Untuk <strong>VIP Profile, Private, dan Sharing</strong>, setiap
+                        pesanan hanya boleh login pada 1 perangkat sesuai aturan paket.
+                        Khusus <strong>Premium Account</strong>, akun sepenuhnya milik kamu
+                        dan tidak digunakan pelanggan lain. Penggunaan perangkat serta batas
+                        tontonan bersamaan mengikuti ketentuan layanan.
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Apakah perlu VPN dan apakah tersedia kualitas 4K?</summary>
+                    <div class="faq-answer">
+                        Tidak perlu menggunakan VPN. Kualitas tayangan mendukung hingga
+                        <strong>4K UHD</strong>, tergantung perangkat, kecepatan internet,
+                        paket layanan, dan ketersediaan kualitas pada film yang ditonton.
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Apa itu screen limit?</summary>
+                    <div class="faq-answer">
+                        Screen limit terjadi ketika batas layar sedang digunakan pengguna
+                        lain. Risiko paling besar terdapat pada paket Sharing. Agar lebih
+                        aman, unduh tayangan terlebih dahulu lalu tonton melalui
+                        <strong>mode offline</strong>.
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Apakah produk mendapatkan garansi?</summary>
+                    <div class="faq-answer">
+                        Ya, tersedia <strong>garansi selama masa aktif</strong> apabila
+                        terjadi kendala pada akun. Hubungi admin dan kirimkan bukti kendala
+                        agar dapat segera diperiksa. Garansi tidak berlaku apabila aturan
+                        penggunaan paket dilanggar atau data akun diubah tanpa izin.
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Bolehkah mengubah PIN atau data akun?</summary>
+                    <div class="faq-answer">
+                        Khusus <strong>Premium Account</strong>, akun diberikan sebagai
+                        full kepemilikan dan email dapat diganti ke email kamu sesuai petunjuk
+                        admin. Untuk VIP Profile, Private, dan Sharing, jangan mengubah
+                        <strong>email, password, PIN, nama profil,</strong> atau pengaturan akun
+                        tanpa izin admin agar garansi tetap berlaku.
+                    </div>
+                </details>
+
+            </div>
+        </section>
+
         <footer class="footer">
             <p>
-                Harga akan cenderung naik seiring berjalanya waktu (Dollar 18.000 Ribu).
+                Pastikan memilih paket sesuai kebutuhan dan membaca ketentuan sebelum membeli.
             </p>
 
             <p>
-                © <span id="year"></span> flixwayne
+                © <span id="year"></span> Flix Wayne
             </p>
         </footer>
 
