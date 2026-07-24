@@ -1,1555 +1,842 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Flix Wayne | Paket Streaming Netflix</title>
-
-    <meta
-        name="description"
-        content="Pilih paket streaming mulai dari Sharing, Private, VIP Profile, hingga Premium Account full kepemilikan."
-    >
-
-    <style>
-        :root {
-            --background: #f3f4f6;
-            --card: #ffffff;
-            --text: #171717;
-            --muted: #737373;
-            --border: #e5e7eb;
-            --primary: #111827;
-            --whatsapp: #25d366;
-            --shopee: #ee4d2d;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            min-height: 100vh;
-            padding-bottom: 100px;
-            font-family: Arial, Helvetica, sans-serif;
-            color: var(--text);
-            background: var(--background);
-            -webkit-font-smoothing: antialiased;
-        }
-
-        body.modal-open {
-            overflow: hidden;
-        }
-
-        button,
-        a {
-            font: inherit;
-        }
-
-        button {
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .app {
-            width: 100%;
-            max-width: 520px;
-            margin: 0 auto;
-            padding: 20px 16px;
-        }
-
-        /* Header */
-
-        .header {
-            padding: 12px 4px 26px;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 30px;
-        }
-
-        .brand-name {
-            font-size: 20px;
-            font-weight: 800;
-            letter-spacing: -0.4px;
-        }
-
-        .status {
-            padding: 7px 11px;
-            border-radius: 999px;
-            color: #16803c;
-            background: #dcfce7;
-            font-size: 12px;
-            font-weight: 700;
-        }
-
-        .header h1 {
-            max-width: 420px;
-            margin-bottom: 10px;
-            font-size: 32px;
-            line-height: 1.15;
-            letter-spacing: -1px;
-        }
-
-        .header p {
-            max-width: 430px;
-            color: var(--muted);
-            font-size: 15px;
-            line-height: 1.6;
-        }
-
-
-        /* Free Trial */
-
-        .free-trial {
-            margin-bottom: 16px;
-            padding: 20px;
-            border: 1px solid #ffffff;
-            border-radius: 20px;
-            color: #fdfcfc;
-            background: #000000;
-        }
-
-        .free-trial-badge {
-            display: inline-block;
-            margin-bottom: 13px;
-            padding: 6px 9px;
-            border-radius: 5px;
-            color: #000000;
-            background: #ffffff;
-            font-size: 10px;
-            font-weight: 800;
-            letter-spacing: 0.3px;
-        }
-
-        .free-trial h2 {
-            margin-bottom: 8px;
-            font-size: 24px;
-            line-height: 1.2;
-            letter-spacing: -0.6px;
-        }
-
-        .free-trial > p {
-            color: #ffffff;;
-            font-size: 13px;
-            line-height: 1.6;
-        }
-
-        .trial-benefits {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 0;
-            margin: 15px 0;
-            color: #ffffff;
-            font-size: 11px;
-            font-weight: 700;
-        }
-
-        .trial-benefits span {
-            padding: 0;
-            color: inherit;
-            background: transparent;
-        }
-
-        .trial-benefits span + span::before {
-            content: "•";
-            margin: 0 8px;
-            color: #a3a3a3;
-        }
-
-        .trial-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            min-height: 50px;
-            border: 1px solid #171717;
-            border-radius: 12px;
-            color: #000000;
-            background: #ffffff;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 800;
-            transition:s
-                transform 0.15s ease,
-                opacity 0.15s ease;
-        }
-
-        .trial-button:hover {
-            opacity: 0.88;
-        }
-
-        .trial-button:active {
-            transform: scale(0.98);
-        }
-
-        .trial-note {
-            margin-top: 10px;
-            color: #000000 !important;
-            text-align: center;
-            font-size: 10px !important;
-            line-height: 1.45 !important;
-        }
-
-        /* Pilihan paket cepat */
-
-        .quick-select {
-            margin-bottom: 16px;
-            padding: 18px;
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            background: var(--card);
-        }
-
-        .quick-select-header {
-            margin-bottom: 14px;
-        }
-
-        .quick-select-header h2 {
-            margin-bottom: 5px;
-            font-size: 18px;
-            letter-spacing: -0.3px;
-        }
-
-        .quick-select-header p {
-            color: var(--muted);
-            font-size: 13px;
-            line-height: 1.55;
-        }
-
-        .quick-select-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        .quick-option {
-            display: block;
-            padding: 13px;
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            color: var(--text);
-            background: #ffffff;
-            text-decoration: none;
-            transition: transform 0.15s ease, background 0.15s ease;
-        }
-
-        .quick-option:hover {
-            background: #fafafa;
-        }
-
-        .quick-option:active {
-            transform: scale(0.98);
-        }
-
-        .quick-option strong {
-            display: block;
-            margin-bottom: 4px;
-            font-size: 13px;
-        }
-
-        .quick-option span {
-            display: block;
-            color: var(--muted);
-            font-size: 11px;
-            line-height: 1.45;
-        }
-
-        /* Package cards */
-
-        .packages {
-            display: grid;
-            gap: 16px;
-        }
-
-        .package-card {
-            scroll-margin-top: 20px;
-            padding: 20px;
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            background: var(--card);
-        }
-
-        .package-card.premium-account {
-            border-color: #c7d2fe;
-            background: linear-gradient(180deg, #ffffff 0%, #f8faff 100%);
-            box-shadow: 0 10px 30px rgba(17, 24, 39, 0.06);
-        }
-
-        .premium-note {
-            margin: -4px 0 15px;
-            padding: 12px 13px;
-            border: 1px solid #e0e7ff;
-            border-radius: 13px;
-            color: #374151;
-            background: #eef2ff;
-            font-size: 12px;
-            line-height: 1.55;
-        }
-
-        .premium-note strong {
-            color: var(--text);
-        }
-
-        .package-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            margin-bottom: 18px;
-        }
-
-        .package-title {
-            font-size: 19px;
-            font-weight: 800;
-        }
-
-        .package-name-group {
-            display: grid;
-            gap: 5px;
-        }
-
-        .package-code {
-            width: fit-content;
-            padding: 4px 8px;
-            border-radius: 999px;
-            color: #374151;
-            background: #f3f4f6;
-            font-size: 10px;
-            font-weight: 800;
-            letter-spacing: 0.2px;
-        }
-
-        .discount {
-            padding: 6px 9px;
-            border-radius: 999px;
-            color: var(--shopee);
-            background: #fff1ed;
-            font-size: 11px;
-            font-weight: 800;
-        }
-
-        .package-list {
-            display: grid;
-            gap: 10px;
-        }
-
-        .package-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            padding: 14px;
-            border: 1px solid var(--border);
-            border-radius: 14px;
-        }
-
-        .package-duration {
-            margin-bottom: 5px;
-            font-size: 14px;
-            font-weight: 700;
-        }
-
-        .price {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 7px;
-        }
-
-        .old-price {
-            color: #a3a3a3;
-            font-size: 11px;
-            text-decoration: line-through;
-        }
-
-        .new-price {
-            font-size: 16px;
-            font-weight: 800;
-        }
-
-        .order-button {
-            min-width: 72px;
-            padding: 10px 12px;
-            border: none;
-            border-radius: 10px;
-            color: #ffffff;
-            background: var(--primary);
-            font-size: 13px;
-            font-weight: 700;
-            cursor: pointer;
-            transition:
-                transform 0.15s ease,
-                opacity 0.15s ease;
-        }
-
-        .order-button:hover {
-            opacity: 0.9;
-        }
-
-        .order-button:active {
-            transform: scale(0.96);
-        }
-
-        /* Information */
-
-        .information {
-            margin-top: 16px;
-            padding: 18px;
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            background: var(--card);
-        }
-
-        .information h2 {
-            margin-bottom: 12px;
-            font-size: 16px;
-        }
-
-        .information ul {
-            display: grid;
-            gap: 9px;
-            padding-left: 18px;
-            color: var(--muted);
-            font-size: 13px;
-            line-height: 1.5;
-        }
-
-
-        /* FAQ */
-
-        .faq {
-            margin-top: 16px;
-            padding: 20px;
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            background: var(--card);
-        }
-
-        .faq-header {
-            margin-bottom: 16px;
-        }
-
-        .faq-header h2 {
-            margin-bottom: 6px;
-            font-size: 19px;
-            letter-spacing: -0.3px;
-        }
-
-        .faq-header p {
-            color: var(--muted);
-            font-size: 13px;
-            line-height: 1.6;
-        }
-
-        .faq-list {
-            display: grid;
-            gap: 10px;
-        }
-
-        .faq-item {
-            overflow: hidden;
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            background: #ffffff;
-        }
-
-        .faq-item summary {
-            position: relative;
-            padding: 15px 46px 15px 15px;
-            font-size: 14px;
-            font-weight: 800;
-            line-height: 1.45;
-            list-style: none;
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .faq-item summary::-webkit-details-marker {
-            display: none;
-        }
-
-        .faq-item summary::after {
-            content: "+";
-            position: absolute;
-            top: 50%;
-            right: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            color: #525252;
-            background: #f3f4f6;
-            font-size: 18px;
-            font-weight: 500;
-            transform: translateY(-50%);
-            transition: transform 0.2s ease;
-        }
-
-        .faq-item[open] summary::after {
-            transform: translateY(-50%) rotate(45deg);
-        }
-
-        .faq-answer {
-            padding: 0 15px 15px;
-            color: var(--muted);
-            font-size: 13px;
-            line-height: 1.65;
-        }
-
-        .faq-answer strong {
-            color: var(--text);
-        }
-
-        .faq-answer ul {
-            display: grid;
-            gap: 7px;
-            margin-top: 9px;
-            padding-left: 18px;
-        }
-
-        /* Footer */
-
-        .footer {
-            padding: 28px 10px 10px;
-            color: var(--muted);
-            text-align: center;
-            font-size: 12px;
-            line-height: 1.7;
-        }
-
-        .footer p + p {
-            margin-top: 8px;
-        }
-
-        /* Bottom navigation */
-
-        .bottom-action {
-            position: fixed;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            z-index: 20;
-            padding: 12px 16px 18px;
-            border-top: 1px solid var(--border);
-            background: rgba(255, 255, 255, 0.94);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-        }
-
-        .bottom-action-inner {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            width: 100%;
-            max-width: 488px;
-            margin: 0 auto;
-        }
-
-        .action-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 50px;
-            border-radius: 14px;
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 800;
-            transition:
-                transform 0.15s ease,
-                opacity 0.15s ease;
-        }
-
-        .action-button:hover {
-            opacity: 0.9;
-        }
-
-        .action-button:active {
-            transform: scale(0.97);
-        }
-
-        .whatsapp-button {
-            background: var(--whatsapp);
-        }
-
-        .shopee-button {
-            background: var(--shopee);
-        }
-
-        /* Modal */
-
-        .purchase-modal {
-            position: fixed;
-            inset: 0;
-            z-index: 100;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            visibility: hidden;
-            opacity: 0;
-            transition:
-                visibility 0.25s ease,
-                opacity 0.25s ease;
-        }
-
-        .purchase-modal.active {
-            visibility: visible;
-            opacity: 1;
-        }
-
-        .modal-backdrop {
-            position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.5);
-        }
-
-        .purchase-sheet {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            max-width: 520px;
-            padding: 12px 20px 28px;
-            border-radius: 26px 26px 0 0;
-            background: #ffffff;
-            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.12);
-            transform: translateY(100%);
-            transition: transform 0.3s ease;
-        }
-
-        .purchase-modal.active .purchase-sheet {
-            transform: translateY(0);
-        }
-
-        .sheet-handle {
-            width: 44px;
-            height: 5px;
-            margin: 0 auto 22px;
-            border-radius: 999px;
-            background: #d4d4d4;
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 18px;
-            right: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 34px;
-            height: 34px;
-            border: none;
-            border-radius: 50%;
-            color: #525252;
-            background: #f3f4f6;
-            font-size: 23px;
-            line-height: 1;
-            cursor: pointer;
-        }
-
-        .close-modal:active {
-            transform: scale(0.95);
-        }
-
-        .modal-label {
-            margin-bottom: 5px;
-            color: var(--muted);
-            font-size: 13px;
-        }
-
-        .purchase-sheet h2 {
-            padding-right: 45px;
-            font-size: 23px;
-            line-height: 1.25;
-        }
-
-        .selected-price {
-            margin-top: 5px;
-            font-size: 18px;
-            font-weight: 800;
-        }
-
-        .modal-description {
-            margin: 18px 0 14px;
-            color: var(--muted);
-            font-size: 14px;
-        }
-
-        .purchase-options {
-            display: grid;
-            gap: 12px;
-        }
-
-        .purchase-option {
-            display: grid;
-            grid-template-columns: 46px 1fr auto;
-            align-items: center;
-            gap: 13px;
-            padding: 15px;
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            color: var(--text);
-            text-decoration: none;
-            transition:
-                transform 0.15s ease,
-                background 0.15s ease;
-        }
-
-        .purchase-option:hover {
-            background: #fafafa;
-        }
-
-        .purchase-option:active {
-            transform: scale(0.98);
-        }
-
-        .option-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 46px;
-            height: 46px;
-            border-radius: 13px;
-            color: #ffffff;
-            font-size: 13px;
-            font-weight: 800;
-        }
-
-        .whatsapp-option .option-icon {
-            background: var(--whatsapp);
-        }
-
-        .shopee-option .option-icon {
-            background: var(--shopee);
-        }
-
-        .purchase-option strong {
-            display: block;
-            margin-bottom: 3px;
-            font-size: 15px;
-        }
-
-        .purchase-option small {
-            display: block;
-            color: var(--muted);
-            font-size: 12px;
-            line-height: 1.4;
-        }
-
-        .arrow {
-            color: #a3a3a3;
-            font-size: 28px;
-            line-height: 1;
-        }
-
-        @media (max-width: 370px) {
-            .quick-select-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .header h1 {
-                font-size: 28px;
-            }
-
-            .package-item {
-                align-items: flex-start;
-                flex-direction: column;
-            }
-
-            .order-button {
-                width: 100%;
-            }
-
-            .purchase-sheet {
-                padding-right: 16px;
-                padding-left: 16px;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                scroll-behavior: auto !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flix Wayne | Paket Streaming Netflix</title>
+  <meta name="description" content="Pilih paket streaming Sharing dan Private dengan harga terbaik.">
+  <style>
+    :root {
+      --background: #f3f4f6;
+      --card: #ffffff;
+      --text: #171717;
+      --muted: #737373;
+      --border: #e5e7eb;
+      --primary: #111827;
+      --whatsapp: #25d366;
+      --shopee: #ee4d2d;
+      --soldout: #9ca3af;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      min-height: 100vh;
+      padding-bottom: 100px;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--background);
+      -webkit-font-smoothing: antialiased;
+    }
+    body.modal-open {
+      overflow: hidden;
+    }
+    button, a {
+      font: inherit;
+    }
+    button {
+      -webkit-tap-highlight-color: transparent;
+    }
+    .app {
+      width: 100%;
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 20px 16px;
+    }
+    .header {
+      padding: 12px 4px 26px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 30px;
+    }
+    .brand-name {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+    }
+    .status {
+      padding: 7px 11px;
+      border-radius: 999px;
+      color: #16803c;
+      background: #dcfce7;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .header h1 {
+      max-width: 420px;
+      margin-bottom: 10px;
+      font-size: 32px;
+      line-height: 1.15;
+      letter-spacing: -1px;
+    }
+    .header p {
+      max-width: 430px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    .quick-select {
+      margin-bottom: 16px;
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: var(--card);
+    }
+    .quick-select-header {
+      margin-bottom: 14px;
+    }
+    .quick-select-header h2 {
+      margin-bottom: 5px;
+      font-size: 18px;
+      letter-spacing: -0.3px;
+    }
+    .quick-select-header p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .quick-select-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .quick-option {
+      display: block;
+      padding: 13px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      color: var(--text);
+      background: #ffffff;
+      text-decoration: none;
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+    .quick-option:hover {
+      background: #fafafa;
+    }
+    .quick-option:active {
+      transform: scale(0.98);
+    }
+    .quick-option strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 13px;
+    }
+    .quick-option span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.45;
+    }
+    .packages {
+      display: grid;
+      gap: 16px;
+    }
+    .package-card {
+      scroll-margin-top: 20px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: var(--card);
+    }
+    .package-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .package-title {
+      font-size: 19px;
+      font-weight: 800;
+    }
+    .package-name-group {
+      display: grid;
+      gap: 5px;
+    }
+    .package-code {
+      width: fit-content;
+      padding: 4px 8px;
+      border-radius: 999px;
+      color: #374151;
+      background: #f3f4f6;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+    }
+    .discount {
+      padding: 6px 9px;
+      border-radius: 999px;
+      color: var(--shopee);
+      background: #fff1ed;
+      font-size: 11px;
+      font-weight: 800;
+    }
+    .package-list {
+      display: grid;
+      gap: 10px;
+    }
+    .package-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+    .package-item.sold-out {
+      opacity: 0.6;
+      background: #f9fafb;
+      border-color: #d1d5db;
+    }
+    .package-item.sold-out .order-button {
+      background: var(--soldout);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .package-duration {
+      margin-bottom: 5px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .price {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+    .old-price {
+      color: #a3a3a3;
+      font-size: 11px;
+      text-decoration: line-through;
+    }
+    .new-price {
+      font-size: 16px;
+      font-weight: 800;
+    }
+    .sold-out-badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 999px;
+      color: #ffffff;
+      background: #ef4444;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-left: 6px;
+    }
+    .order-button {
+      min-width: 72px;
+      padding: 10px 12px;
+      border: none;
+      border-radius: 10px;
+      color: #ffffff;
+      background: var(--primary);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+    .order-button:hover {
+      opacity: 0.9;
+    }
+    .order-button:active {
+      transform: scale(0.96);
+    }
+    .information {
+      margin-top: 16px;
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--card);
+    }
+    .information h2 {
+      margin-bottom: 12px;
+      font-size: 16px;
+    }
+    .information ul {
+      display: grid;
+      gap: 9px;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .faq {
+      margin-top: 16px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: var(--card);
+    }
+    .faq-header {
+      margin-bottom: 16px;
+    }
+    .faq-header h2 {
+      margin-bottom: 6px;
+      font-size: 19px;
+      letter-spacing: -0.3px;
+    }
+    .faq-header p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .faq-list {
+      display: grid;
+      gap: 10px;
+    }
+    .faq-item {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: #ffffff;
+    }
+    .faq-item summary {
+      position: relative;
+      padding: 15px 46px 15px 15px;
+      font-size: 14px;
+      font-weight: 800;
+      line-height: 1.45;
+      list-style: none;
+      cursor: pointer;
+      user-select: none;
+    }
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+    .faq-item summary::after {
+      content: "+";
+      position: absolute;
+      top: 50%;
+      right: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      color: #525252;
+      background: #f3f4f6;
+      font-size: 18px;
+      font-weight: 500;
+      transform: translateY(-50%);
+      transition: transform 0.2s ease;
+    }
+    .faq-item[open] summary::after {
+      transform: translateY(-50%) rotate(45deg);
+    }
+    .faq-answer {
+      padding: 0 15px 15px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+    .faq-answer strong {
+      color: var(--text);
+    }
+    .faq-answer ul {
+      display: grid;
+      gap: 7px;
+      margin-top: 9px;
+      padding-left: 18px;
+    }
+    .footer {
+      padding: 28px 10px 10px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+    .footer p + p {
+      margin-top: 8px;
+    }
+    .bottom-action {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 20;
+      padding: 12px 16px 18px;
+      border-top: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+    }
+    .bottom-action-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      width: 100%;
+      max-width: 488px;
+      margin: 0 auto;
+    }
+    .action-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      border-radius: 14px;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 800;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+    .action-button:hover {
+      opacity: 0.9;
+    }
+    .action-button:active {
+      transform: scale(0.97);
+    }
+    .whatsapp-button {
+      background: var(--whatsapp);
+    }
+    .shopee-button {
+      background: var(--shopee);
+    }
+    .purchase-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0.25s ease, opacity 0.25s ease;
+    }
+    .purchase-modal.active {
+      visibility: visible;
+      opacity: 1;
+    }
+    .modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+    }
+    .purchase-sheet {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 520px;
+      padding: 12px 20px 28px;
+      border-radius: 26px 26px 0 0;
+      background: #ffffff;
+      box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.12);
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+    .purchase-modal.active .purchase-sheet {
+      transform: translateY(0);
+    }
+    .sheet-handle {
+      width: 44px;
+      height: 5px;
+      margin: 0 auto 22px;
+      border-radius: 999px;
+      background: #d4d4d4;
+    }
+    .close-modal {
+      position: absolute;
+      top: 18px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border: none;
+      border-radius: 50%;
+      color: #525252;
+      background: #f3f4f6;
+      font-size: 23px;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .close-modal:active {
+      transform: scale(0.95);
+    }
+    .modal-label {
+      margin-bottom: 5px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .purchase-sheet h2 {
+      padding-right: 45px;
+      font-size: 23px;
+      line-height: 1.25;
+    }
+    .selected-price {
+      margin-top: 5px;
+      font-size: 18px;
+      font-weight: 800;
+    }
+    .modal-description {
+      margin: 18px 0 14px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .purchase-options {
+      display: grid;
+      gap: 12px;
+    }
+    .purchase-option {
+      display: grid;
+      grid-template-columns: 46px 1fr auto;
+      align-items: center;
+      gap: 13px;
+      padding: 15px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      color: var(--text);
+      text-decoration: none;
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+    .purchase-option:hover {
+      background: #fafafa;
+    }
+    .purchase-option:active {
+      transform: scale(0.98);
+    }
+    .option-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      border-radius: 13px;
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .whatsapp-option .option-icon {
+      background: var(--whatsapp);
+    }
+    .shopee-option .option-icon {
+      background: var(--shopee);
+    }
+    .purchase-option strong {
+      display: block;
+      margin-bottom: 3px;
+      font-size: 15px;
+    }
+    .purchase-option small {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+    .arrow {
+      color: #a3a3a3;
+      font-size: 28px;
+      line-height: 1;
+    }
+    @media (max-width: 370px) {
+      .quick-select-grid {
+        grid-template-columns: 1fr;
+      }
+      .header h1 {
+        font-size: 28px;
+      }
+      .package-item {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+      .order-button {
+        width: 100%;
+      }
+      .purchase-sheet {
+        padding-right: 16px;
+        padding-left: 16px;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
 </head>
-
 <body>
-
-    <main class="app">
-
-        <header class="header">
-            <div class="brand">
-                <span class="brand-name">Flix Wayne</span>
-                <span class="status">Toko aktif</span>
-            </div>
-
-            <h1>Pilih paket yang kamu butuhkan.</h1>
-
-            <p>
-                Pilih durasi paket, kemudian lakukan pembelian melalui
-                WhatsApp atau toko Shopee kami.
-            </p>
-        </header>
-
-
-        <section class="free-trial" aria-labelledby="free-trial-title">
-            <span class="free-trial-badge">GRATIS · KUOTA TERBATAS</span>
-
-            <h2 id="free-trial-title">Coba gratis selama 2 hari.</h2>
-
-            <p>
-                Masih ragu memilih paket? Klaim akses trial terlebih dahulu
-                dan hubungi admin langsung melalui WhatsApp.
-            </p>
-
-            <div class="trial-benefits" aria-label="Keuntungan free trial">
-                <span>2 hari akses</span>
-                <span>Tanpa biaya</span>
-                <span>Tanpa VPN</span>
-            </div>
-
-            <a
-                id="free-trial-link"
-                class="trial-button"
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                Klaim Free Trial via WhatsApp
-            </a>
-
-            <p class="trial-note">
-                Satu orang satu kali trial. Ketersediaan mengikuti kuota dan persetujuan admin.
-            </p>
-        </section>
-
-        <section class="quick-select" aria-labelledby="quick-select-title">
-            <div class="quick-select-header">
-                <h2 id="quick-select-title">Pilih paket cepat</h2>
-                <p>Pilih berdasarkan perangkat dan tingkat privasi yang kamu butuhkan.</p>
-            </div>
-
-            <div class="quick-select-grid">
-                <a class="quick-option" href="#sharing">
-                    <strong>Paling hemat</strong>
-                    <span>Sharing 1P2U untuk HP atau tablet.</span>
-                </a>
-
-                <a class="quick-option" href="#private">
-                    <strong>Profil pribadi</strong>
-                    <span>Private 1P1U untuk HP, PC, atau laptop.</span>
-                </a>
-
-                <a class="quick-option" href="#vip-profile">
-                    <strong>Pilihan untuk TV</strong>
-                    <span>VIP Profile yang lebih stabil dan anti screen limit.</span>
-                </a>
-
-                <a class="quick-option" href="#premium-account">
-                    <strong>Full kepemilikan</strong>
-                    <span>1 akun penuh, 5 profil, dan hanya kamu yang menggunakannya.</span>
-                </a>
-            </div>
-        </section>
-
-        <section class="packages">
-
-            <!-- Sharing -->
-
-            <article class="package-card" id="sharing">
-                <div class="package-header">
-                    <div class="package-name-group">
-                        <h2 class="package-title">Sharing</h2>
-                        <span class="package-code">1P2U · 1 Profil 2 User</span>
-                    </div>
-                    <span class="discount">Diskon 60%</span>
-                </div>
-
-                <div class="package-list">
-
-                    <div class="package-item">
-                        <div>
-                            <div class="package-duration">30 Hari</div>
-
-                            <div class="price">
-                                <span class="old-price">Rp52.000</span>
-                                <span class="new-price">Rp20.800</span>
-                            </div>
-                        </div>
-
-                        <button
-                            type="button"
-                            class="order-button"
-                            data-product="Sharing 1P2U 30 Hari"
-                            data-price="Rp20.800"
-                            data-shopee=""
-                        >
-                            Pesan
-                        </button>
-                    </div>
-
-                    <div class="package-item">
-                        <div>
-                            <div class="package-duration">60 Hari</div>
-
-                            <div class="price">
-                                <span class="old-price">Rp94.000</span>
-                                <span class="new-price">Rp37.600</span>
-                            </div>
-                        </div>
-
-                        <button
-                            type="button"
-                            class="order-button"
-                            data-product="Sharing 1P2U 60 Hari"
-                            data-price="Rp37.600"
-                            data-shopee=""
-                        >
-                            Pesan
-                        </button>
-                    </div>
-
-                    <div class="package-item">
-                        <div>
-                            <div class="package-duration">90 Hari</div>
-
-                            <div class="price">
-                                <span class="old-price">Rp142.000</span>
-                                <span class="new-price">Rp56.800</span>
-                            </div>
-                        </div>
-
-                        <button
-                            type="button"
-                            class="order-button"
-                            data-product="Sharing 1P2U 90 Hari"
-                            data-price="Rp56.800"
-                            data-shopee=""
-                        >
-                            Pesan
-                        </button>
-                    </div>
-
-                </div>
-            </article>
-
-            <!-- Private -->
-
-            <article class="package-card" id="private">
-                <div class="package-header">
-                    <div class="package-name-group">
-                        <h2 class="package-title">Private</h2>
-                        <span class="package-code">1P1U · 1 Profil 1 User</span>
-                    </div>
-                    <span class="discount">Diskon 60%</span>
-                </div>
-
-                <div class="package-list">
-
-                    <div class="package-item">
-                        <div>
-                            <div class="package-duration">30 Hari</div>
-
-                            <div class="price">
-                                <span class="old-price">Rp78.000</span>
-                                <span class="new-price">Rp31.200</span>
-                            </div>
-                        </div>
-
-                        <button
-                            type="button"
-                            class="order-button"
-                            data-product="Private 1P1U 30 Hari"
-                            data-price="Rp31.200"
-                            data-shopee=""
-                        >
-                            Pesan
-                        </button>
-                    </div>
-
-                    <div class="package-item">
-                        <div>
-                            <div class="package-duration">60 Hari</div>
-
-                            <div class="price">
-                                <span class="old-price">Rp148.000</span>
-                                <span class="new-price">Rp59.200</span>
-                            </div>
-                        </div>
-
-                        <button
-                            type="button"
-                            class="order-button"
-                            data-product="Private 1P1U 60 Hari"
-                            data-price="Rp59.200"
-                            data-shopee=""
-                        >
-                            Pesan
-                        </button>
-                    </div>
-
-                    <div class="package-item">
-                        <div>
-                            <div class="package-duration">90 Hari</div>
-
-                            <div class="price">
-                                <span class="old-price">Rp184.000</span>
-                                <span class="new-price">Rp73.600</span>
-                            </div>
-                        </div>
-
-                        <button
-                            type="button"
-                            class="order-button"
-                            data-product="Private 1P1U 90 Hari"
-                            data-price="Rp73.600"
-                            data-shopee=""
-                        >
-                            Pesan
-                        </button>
-                    </div>
-
-                </div>
-            </article>
-
-            <!-- VIP Profile -->
-
-            <article class="package-card" id="vip-profile">
-                <div class="package-header">
-                    <div class="package-name-group">
-                        <h2 class="package-title">VIP Profile</h2>
-                        <span class="package-code">1P1U Premium · Khusus TV</span>
-                    </div>
-                    <span class="discount">Diskon 60%</span>
-                </div>
-
-                <div class="package-list">
-
-                    <div class="package-item">
-                        <div>
-                            <div class="package-duration">30 Hari</div>
-
-                            <div class="price">
-                                <span class="old-price">Rp102.000</span>
-                                <span class="new-price">Rp40.800</span>
-                            </div>
-                        </div>
-
-                        <button
-                            type="button"
-                            class="order-button"
-                            data-product="VIP Profile 1P1U Premium 30 Hari"
-                            data-price="Rp40.800"
-                            data-shopee=""
-                        >
-                            Pesan
-                        </button>
-                    </div>
-
-                    <div class="package-item">
-                        <div>
-                            <div class="package-duration">60 Hari</div>
-
-                            <div class="price">
-                                <span class="old-price">Rp174.000</span>
-                                <span class="new-price">Rp69.600</span>
-                            </div>
-                        </div>
-
-                        <button
-                            type="button"
-                            class="order-button"
-                            data-product="VIP Profile 1P1U Premium 60 Hari"
-                            data-price="Rp69.600"
-                            data-shopee=""
-                        >
-                            Pesan
-                        </button>
-                    </div>
-
-                    <div class="package-item">
-                        <div>
-                            <div class="package-duration">90 Hari</div>
-
-                            <div class="price">
-                                <span class="old-price">Rp218.000</span>
-                                <span class="new-price">Rp87.200</span>
-                            </div>
-                        </div>
-
-                        <button
-                            type="button"
-                            class="order-button"
-                            data-product="VIP Profile 1P1U Premium 90 Hari"
-                            data-price="Rp87.200"
-                            data-shopee=""
-                        >
-                            Pesan
-                        </button>
-                    </div>
-
-                </div>
-            </article>
-
-
-            <!-- Premium Account -->
-
-            <article class="package-card premium-account" id="premium-account">
-                <div class="package-header">
-                    <div class="package-name-group">
-                        <h2 class="package-title">Premium Account</h2>
-                        <span class="package-code">Full Kepemilikan · 5 Profil · 4K UHD</span>
-                    </div>
-                    <span class="discount">Paling Premium</span>
-                </div>
-
-                <div class="premium-note">
-                    <strong>100% full kepemilikan.</strong> Satu akun hanya digunakan oleh kamu,
-                    mendapatkan 5 profil, email dapat diganti ke email kamu, dan bergaransi
-                    selama masa aktif apabila terjadi kendala pada akun.
-                </div>
-
-                <div class="package-list">
-
-                    <div class="package-item">
-                        <div>
-                            <div class="package-duration">30 Hari</div>
-
-                            <div class="price">
-                                <span class="old-price">Rp186.000</span>
-                                <span class="new-price">Rp135.000</span>
-                            </div>
-                        </div>
-
-                        <button
-                            type="button"
-                            class="order-button"
-                            data-product="Premium Account Full Kepemilikan 5 Profil 4K UHD 30 Hari"
-                            data-price="Rp135.000"
-                            data-shopee=""
-                        >
-                            Pesan
-                        </button>
-                    </div>
-
-                </div>
-            </article>
-
-        </section>
-
-        <section class="information">
-            <h2>Cara pembelian</h2>
-
-            <ul>
-                <li>Pilih paket dan tekan tombol Pesan.</li>
-                <li>Pilih pembelian melalui WhatsApp atau Shopee.</li>
-                <li>Periksa detail paket sebelum melakukan pembayaran.</li>
-            </ul>
-        </section>
-
-
-        <section class="faq" aria-labelledby="faq-title">
-            <div class="faq-header">
-                <h2 id="faq-title">FAQ</h2>
-                <p>Pertanyaan yang sering ditanyakan sebelum membeli.</p>
-            </div>
-
-            <div class="faq-list">
-
-                <details class="faq-item">
-                    <summary>Apa arti 1P1U dan 1P2U?</summary>
-                    <div class="faq-answer">
-                        <strong>1P1U</strong> berarti 1 profil digunakan oleh 1 pengguna.
-                        <strong>1P2U</strong> berarti 1 profil digunakan maksimal oleh
-                        2 pengguna secara bergantian.
-                    </div>
-                </details>
-
-                <details class="faq-item">
-                    <summary>Apa perbedaan Premium Account, VIP Profile, Private, dan Sharing?</summary>
-                    <div class="faq-answer">
-                        <strong>Premium Account</strong>: 100% full kepemilikan.
-                        Satu akun hanya digunakan oleh kamu, tersedia 5 profil, kualitas
-                        4K UHD, email dapat diganti ke email kamu, dan mendapatkan garansi
-                        selama masa aktif.<br><br>
-                        <strong>VIP Profile (1P1U Premium)</strong>: lebih stabil,
-                        anti screen limit, dan direkomendasikan untuk TV.<br><br>
-                        <strong>Private (1P1U)</strong>: profil pribadi untuk 1 pengguna,
-                        cocok untuk HP, PC, laptop, dan tablet.<br><br>
-                        <strong>Sharing (1P2U)</strong>: profil digunakan maksimal
-                        2 pengguna, lebih hemat, tetapi lebih rawan screen limit.
-                    </div>
-                </details>
-
-                <details class="faq-item">
-                    <summary>Paket mana yang cocok untuk perangkat saya?</summary>
-                    <div class="faq-answer">
-                        Untuk akses paling lengkap dengan <strong>5 profil</strong>,
-                        pilih Premium Account. Untuk <strong>TV</strong>, pilih VIP Profile.
-                        Untuk <strong>HP, PC, laptop, atau tablet</strong>, pilih Private.
-                        Paket Sharing lebih disarankan untuk <strong>HP atau tablet</strong>.
-                    </div>
-                </details>
-
-                <details class="faq-item">
-                    <summary>Boleh login di berapa perangkat?</summary>
-                    <div class="faq-answer">
-                        Untuk <strong>VIP Profile, Private, dan Sharing</strong>, setiap
-                        pesanan hanya boleh login pada 1 perangkat sesuai aturan paket.
-                        Khusus <strong>Premium Account</strong>, akun sepenuhnya milik kamu
-                        dan tidak digunakan pelanggan lain. Penggunaan perangkat serta batas
-                        tontonan bersamaan mengikuti ketentuan layanan.
-                    </div>
-                </details>
-
-                <details class="faq-item">
-                    <summary>Apakah perlu VPN dan apakah tersedia kualitas 4K?</summary>
-                    <div class="faq-answer">
-                        Tidak perlu menggunakan VPN. Kualitas tayangan mendukung hingga
-                        <strong>4K UHD</strong>, tergantung perangkat, kecepatan internet,
-                        paket layanan, dan ketersediaan kualitas pada film yang ditonton.
-                    </div>
-                </details>
-
-                <details class="faq-item">
-                    <summary>Apa itu screen limit?</summary>
-                    <div class="faq-answer">
-                        Screen limit terjadi ketika batas layar sedang digunakan pengguna
-                        lain. Risiko paling besar terdapat pada paket Sharing. Agar lebih
-                        aman, unduh tayangan terlebih dahulu lalu tonton melalui
-                        <strong>mode offline</strong>.
-                    </div>
-                </details>
-
-                <details class="faq-item">
-                    <summary>Apakah produk mendapatkan garansi?</summary>
-                    <div class="faq-answer">
-                        Ya, tersedia <strong>garansi selama masa aktif</strong> apabila
-                        terjadi kendala pada akun. Hubungi admin dan kirimkan bukti kendala
-                        agar dapat segera diperiksa. Garansi tidak berlaku apabila aturan
-                        penggunaan paket dilanggar atau data akun diubah tanpa izin.
-                    </div>
-                </details>
-
-                <details class="faq-item">
-                    <summary>Bolehkah mengubah PIN atau data akun?</summary>
-                    <div class="faq-answer">
-                        Khusus <strong>Premium Account</strong>, akun diberikan sebagai
-                        full kepemilikan dan email dapat diganti ke email kamu sesuai petunjuk
-                        admin. Untuk VIP Profile, Private, dan Sharing, jangan mengubah
-                        <strong>email, password, PIN, nama profil,</strong> atau pengaturan akun
-                        tanpa izin admin agar garansi tetap berlaku.
-                    </div>
-                </details>
-
-            </div>
-        </section>
-
-        <footer class="footer">
-            <p>
-                Pastikan memilih paket sesuai kebutuhan dan membaca ketentuan sebelum membeli.
-            </p>
-
-            <p>
-                © <span id="year"></span> Flix Wayne
-            </p>
-        </footer>
-
-    </main>
-
-    <!-- Tombol bawah -->
-
-    <nav class="bottom-action" aria-label="Menu pembelian">
-        <div class="bottom-action-inner">
-
-            <a
-                id="whatsapp-link"
-                class="action-button whatsapp-button"
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                WhatsApp
-            </a>
-
-            <a
-                id="shopee-link"
-                class="action-button shopee-button"
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                Shopee
-            </a>
-
+  <main class="app">
+    <header class="header">
+      <div class="brand">
+        <span class="brand-name">Flix Wayne</span>
+        <span class="status">Toko aktif</span>
+      </div>
+      <h1>Pilih paket yang kamu butuhkan.</h1>
+      <p>Pilih durasi paket, kemudian lakukan pembelian melalui WhatsApp atau toko Shopee kami.</p>
+    </header>
+
+    <section class="quick-select" aria-labelledby="quick-select-title">
+      <div class="quick-select-header">
+        <h2 id="quick-select-title">Pilih paket cepat</h2>
+        <p>Pilih berdasarkan perangkat dan tingkat privasi yang kamu butuhkan.</p>
+      </div>
+      <div class="quick-select-grid">
+        <a class="quick-option" href="#sharing">
+          <strong>Paling hemat</strong>
+          <span>Sharing 1P2U untuk HP atau tablet.</span>
+        </a>
+        <a class="quick-option" href="#private">
+          <strong>Profil pribadi</strong>
+          <span>Private 1P1U untuk HP, PC, atau laptop.</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="packages">
+      <article class="package-card" id="sharing">
+        <div class="package-header">
+          <div class="package-name-group">
+            <h2 class="package-title">Sharing</h2>
+            <span class="package-code">1P2U · 1 Profil 2 User</span>
+          </div>
+          <span class="discount">Diskon 75%</span>
         </div>
-    </nav>
-
-    <!-- Popup pilihan pembelian -->
-
-    <div
-        class="purchase-modal"
-        id="purchase-modal"
-        aria-hidden="true"
-    >
-
-        <div
-            class="modal-backdrop"
-            data-close-modal
-        ></div>
-
-        <div
-            class="purchase-sheet"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="selected-product"
-        >
-
-            <div class="sheet-handle"></div>
-
-            <button
-                class="close-modal"
-                type="button"
-                aria-label="Tutup pilihan pembelian"
-                data-close-modal
-            >
-                ×
-            </button>
-
-            <p class="modal-label">Paket yang dipilih</p>
-
-            <h2 id="selected-product">
-                Sharing 30 Hari
-            </h2>
-
-            <p
-                class="selected-price"
-                id="selected-price"
-            >
-                Rp20.800
-            </p>
-
-            <p class="modal-description">
-                Pilih tempat pembelian yang kamu inginkan.
-            </p>
-
-            <div class="purchase-options">
-
-                <a
-                    id="modal-whatsapp"
-                    class="purchase-option whatsapp-option"
-                    href="#"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <span class="option-icon">WA</span>
-
-                    <span>
-                        <strong>WhatsApp</strong>
-                        <small>Pesan langsung melalui chat</small>
-                    </span>
-
-                    <span class="arrow">›</span>
-                </a>
-
-                <a
-                    id="modal-shopee"
-                    class="purchase-option shopee-option"
-                    href="#"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <span class="option-icon">S</span>
-
-                    <span>
-                        <strong>Shopee</strong>
-                        <small>Beli melalui toko Shopee</small>
-                    </span>
-
-                    <span class="arrow">›</span>
-                </a>
-
+        <div class="package-list">
+          <div class="package-item">
+            <div>
+              <div class="package-duration">30 Hari</div>
+              <div class="price">
+                <span class="old-price">Rp52.000</span>
+                <span class="new-price">Rp13.000</span>
+              </div>
             </div>
+            <button type="button" class="order-button" data-product="Sharing 1P2U 30 Hari" data-price="Rp20.800" data-shopee="">Pesan</button>
+          </div>
+          <div class="package-item">
+            <div>
+              <div class="package-duration">60 Hari</div>
+              <div class="price">
+                <span class="old-price">Rp94.000</span>
+                <span class="new-price">Rp23.500</span>
+              </div>
+            </div>
+            <button type="button" class="order-button" data-product="Sharing 1P2U 60 Hari" data-price="Rp37.600" data-shopee="">Pesan</button>
+          </div>
+          <div class="package-item">
+            <div>
+              <div class="package-duration">90 Hari</div>
+              <div class="price">
+                <span class="old-price">Rp142.000</span>
+                <span class="new-price">Rp35.500</span>
+              </div>
+            </div>
+            <button type="button" class="order-button" data-product="Sharing 1P2U 90 Hari" data-price="Rp56.800" data-shopee="">Pesan</button>
+          </div>
         </div>
+      </article>
+
+      <article class="package-card" id="private">
+        <div class="package-header">
+          <div class="package-name-group">
+            <h2 class="package-title">Private</h2>
+            <span class="package-code">1P1U · 1 Profil 1 User</span>
+          </div>
+          <span class="discount">Diskon 75%</span>
+        </div>
+        <div class="package-list">
+          <div class="package-item">
+            <div>
+              <div class="package-duration">30 Hari</div>
+              <div class="price">
+                <span class="old-price">Rp78.000</span>
+                <span class="new-price">Rp19.500</span>
+              </div>
+            </div>
+            <button type="button" class="order-button" data-product="Private 1P1U 30 Hari" data-price="Rp31.200" data-shopee="">Pesan</button>
+          </div>
+          <!-- PRIVATE 60 HARI SOLD OUT -->
+          <div class="package-item sold-out">
+            <div>
+              <div class="package-duration">
+                60 Hari
+                <span class="sold-out-badge">Habis</span>
+              </div>
+              <div class="price">
+                <span class="old-price">Rp148.000</span>
+                <span class="new-price">Rp37.000</span>
+              </div>
+            </div>
+            <button type="button" class="order-button" disabled>Pesan</button>
+          </div>
+          <!-- PRIVATE 90 HARI SOLD OUT -->
+          <div class="package-item sold-out">
+            <div>
+              <div class="package-duration">
+                90 Hari
+                <span class="sold-out-badge">Habis</span>
+              </div>
+              <div class="price">
+                <span class="old-price">Rp184.000</span>
+                <span class="new-price">Rp46.000</span>
+              </div>
+            </div>
+            <button type="button" class="order-button" disabled>Pesan</button>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="information">
+      <h2>Cara pembelian</h2>
+      <ul>
+        <li>Pilih paket dan tekan tombol Pesan.</li>
+        <li>Pilih pembelian melalui WhatsApp atau Shopee.</li>
+        <li>Periksa detail paket sebelum melakukan pembayaran.</li>
+      </ul>
+    </section>
+
+    <section class="faq" aria-labelledby="faq-title">
+      <div class="faq-header">
+        <h2 id="faq-title">FAQ</h2>
+        <p>Pertanyaan yang sering ditanyakan seputar paket Sharing dan Private.</p>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>Apa perbedaan Sharing (1P2U) dan Private (1P1U)?</summary>
+          <div class="faq-answer">
+            <strong>Sharing (1P2U)</strong>: 1 profil digunakan maksimal 2 pengguna bergantian. Lebih hemat, cocok untuk HP/tablet, tapi lebih rawan screen limit.<br><br>
+            <strong>Private (1P1U)</strong>: 1 profil hanya untuk 1 pengguna. Lebih leluasa, minim screen limit, cocok untuk HP, PC, laptop, dan tablet.
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>Paket mana yang cocok untuk perangkat saya?</summary>
+          <div class="faq-answer">
+            Untuk <strong>HP atau tablet</strong>, bisa pilih Sharing (hemat) atau Private (nyaman). Untuk <strong>PC atau laptop</strong>, sangat disarankan paket Private agar tidak terganggu screen limit.
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>Boleh login di berapa perangkat sekaligus?</summary>
+          <div class="faq-answer">
+            Setiap pesanan hanya untuk <strong>1 perangkat aktif</strong>. Anda boleh pindah perangkat sewaktu-waktu, asal tidak login bersamaan di dua perangkat.
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>Apa itu screen limit dan bagaimana solusinya?</summary>
+          <div class="faq-answer">
+            Screen limit muncul saat kuota layar sedang dipakai pengguna lain. Risiko lebih tinggi di paket Sharing. Solusi terbaik: <strong>unduh film/serial</strong> lalu tonton lewat mode offline.
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>Apakah perlu VPN dan apakah bisa 4K?</summary>
+          <div class="faq-answer">
+            <strong>Tidak perlu VPN.</strong> Kualitas hingga <strong>4K UHD</strong> tersedia selama perangkat, internet, dan film yang ditonton mendukung.
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>Bagaimana dengan garansi dan aturan akun?</summary>
+          <div class="faq-answer">
+            Garansi <strong>selama masa aktif</strong> berlaku jika ada kendala akun. Jangan mengubah <strong>email, password, PIN, atau nama profil</strong> tanpa izin agar garansi tetap berlaku. Hubungi admin dengan bukti kendala untuk klaim.
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>Pastikan memilih paket yang sesuai dengan kebutuhan Anda serta <br>membaca seluruh ketentuan sebelum melakukan pembelian</p>
+      <p>© <span id="year"></span> Flix Wayne</p>
+    </footer>
+  </main>
+
+  <nav class="bottom-action" aria-label="Menu pembelian">
+    <div class="bottom-action-inner">
+      <a id="whatsapp-link" class="action-button whatsapp-button" href="#" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      <a id="shopee-link" class="action-button shopee-button" href="#" target="_blank" rel="noopener noreferrer">Shopee</a>
     </div>
+  </nav>
 
-    <script>
-        /* ===============================
-           KONFIGURASI TOKO
-        =============================== */
+  <div class="purchase-modal" id="purchase-modal" aria-hidden="true">
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="purchase-sheet" role="dialog" aria-modal="true" aria-labelledby="selected-product">
+      <div class="sheet-handle"></div>
+      <button class="close-modal" type="button" aria-label="Tutup pilihan pembelian" data-close-modal>×</button>
+      <p class="modal-label">Paket yang dipilih</p>
+      <h2 id="selected-product">Sharing 30 Hari</h2>
+      <p class="selected-price" id="selected-price">Rp20.800</p>
+      <p class="modal-description">Pilih tempat pembelian yang kamu inginkan.</p>
+      <div class="purchase-options">
+        <a id="modal-whatsapp" class="purchase-option whatsapp-option" href="#" target="_blank" rel="noopener noreferrer">
+          <span class="option-icon">WA</span>
+          <span><strong>WhatsApp</strong><small>Pesan langsung melalui chat</small></span>
+          <span class="arrow">›</span>
+        </a>
+        <a id="modal-shopee" class="purchase-option shopee-option" href="#" target="_blank" rel="noopener noreferrer">
+          <span class="option-icon">S</span>
+          <span><strong>Shopee</strong><small>Beli melalui toko Shopee</small></span>
+          <span class="arrow">›</span>
+        </a>
+      </div>
+    </div>
+  </div>
 
-        const storeConfig = {
-            whatsapp: "6288808437124",
-            shopee: "https://s.shopee.co.id/3LPEZA8atU"
-        };
+  <script>
+    const storeConfig = {
+      whatsapp: "6288808437124",
+      shopee: "https://s.shopee.co.id/3LPEZA8atU"
+    };
 
-        /* ===============================
-           ELEMEN
-        =============================== */
+    const purchaseModal = document.getElementById("purchase-modal");
+    const selectedProduct = document.getElementById("selected-product");
+    const selectedPrice = document.getElementById("selected-price");
+    const modalWhatsApp = document.getElementById("modal-whatsapp");
+    const modalShopee = document.getElementById("modal-shopee");
+    const whatsappLink = document.getElementById("whatsapp-link");
+    const shopeeLink = document.getElementById("shopee-link");
 
-        const purchaseModal =
-            document.getElementById("purchase-modal");
+    function createWhatsAppUrl(message) {
+      return "https://wa.me/" + storeConfig.whatsapp + "?text=" + encodeURIComponent(message);
+    }
 
-        const selectedProduct =
-            document.getElementById("selected-product");
+    function openPurchaseModal(product, price, productShopeeUrl) {
+      const whatsappMessage = "Halo Kak, saya ingin membeli paket " + product + " dengan harga " + price + ". Apakah masih tersedia?";
+      selectedProduct.textContent = product;
+      selectedPrice.textContent = price;
+      modalWhatsApp.href = createWhatsAppUrl(whatsappMessage);
+      modalShopee.href = productShopeeUrl || storeConfig.shopee;
+      purchaseModal.classList.add("active");
+      purchaseModal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+    }
 
-        const selectedPrice =
-            document.getElementById("selected-price");
+    function closePurchaseModal() {
+      purchaseModal.classList.remove("active");
+      purchaseModal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("modal-open");
+    }
 
-        const modalWhatsApp =
-            document.getElementById("modal-whatsapp");
+    document.querySelectorAll(".order-button:not([disabled])").forEach(function(button) {
+      button.addEventListener("click", function() {
+        openPurchaseModal(button.dataset.product, button.dataset.price, button.dataset.shopee);
+      });
+    });
 
-        const modalShopee =
-            document.getElementById("modal-shopee");
+    document.querySelectorAll("[data-close-modal]").forEach(function(element) {
+      element.addEventListener("click", closePurchaseModal);
+    });
 
-        const whatsappLink =
-            document.getElementById("whatsapp-link");
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "Escape" && purchaseModal.classList.contains("active")) {
+        closePurchaseModal();
+      }
+    });
 
-        const shopeeLink =
-            document.getElementById("shopee-link");
+    whatsappLink.href = createWhatsAppUrl("Halo Kak, saya ingin bertanya mengenai paket Sharing dan Private yang tersedia.");
+    shopeeLink.href = storeConfig.shopee;
 
-        const freeTrialLink =
-            document.getElementById("free-trial-link");
-
-        /* ===============================
-           WHATSAPP
-        =============================== */
-
-        function createWhatsAppUrl(message) {
-            return (
-                "https://wa.me/" +
-                storeConfig.whatsapp +
-                "?text=" +
-                encodeURIComponent(message)
-            );
-        }
-
-        /* ===============================
-           BUKA POPUP
-        =============================== */
-
-        function openPurchaseModal(product, price, productShopeeUrl) {
-            const whatsappMessage =
-                "Halo Kak, saya ingin membeli paket " +
-                product +
-                " dengan harga " +
-                price +
-                ". Apakah masih tersedia?";
-
-            selectedProduct.textContent = product;
-            selectedPrice.textContent = price;
-
-            modalWhatsApp.href =
-                createWhatsAppUrl(whatsappMessage);
-
-            /*
-                Jika data-shopee pada tombol diisi,
-                link Shopee akan memakai link produk tersebut.
-
-                Jika kosong, link akan memakai link toko utama.
-            */
-
-            modalShopee.href =
-                productShopeeUrl || storeConfig.shopee;
-
-            purchaseModal.classList.add("active");
-            purchaseModal.setAttribute("aria-hidden", "false");
-
-            document.body.classList.add("modal-open");
-        }
-
-        /* ===============================
-           TUTUP POPUP
-        =============================== */
-
-        function closePurchaseModal() {
-            purchaseModal.classList.remove("active");
-            purchaseModal.setAttribute("aria-hidden", "true");
-
-            document.body.classList.remove("modal-open");
-        }
-
-        /* ===============================
-           TOMBOL PESAN
-        =============================== */
-
-        document
-            .querySelectorAll(".order-button")
-            .forEach(function (button) {
-                button.addEventListener("click", function () {
-                    const product = button.dataset.product;
-                    const price = button.dataset.price;
-                    const productShopeeUrl = button.dataset.shopee;
-
-                    openPurchaseModal(
-                        product,
-                        price,
-                        productShopeeUrl
-                    );
-                });
-            });
-
-        /* ===============================
-           TOMBOL TUTUP
-        =============================== */
-
-        document
-            .querySelectorAll("[data-close-modal]")
-            .forEach(function (element) {
-                element.addEventListener(
-                    "click",
-                    closePurchaseModal
-                );
-            });
-
-        document.addEventListener("keydown", function (event) {
-            if (
-                event.key === "Escape" &&
-                purchaseModal.classList.contains("active")
-            ) {
-                closePurchaseModal();
-            }
-        });
-
-        /* ===============================
-           TOMBOL BAWAH
-        =============================== */
-
-        whatsappLink.href = createWhatsAppUrl(
-            "Halo Kak, saya ingin bertanya mengenai paket yang tersedia."
-        );
-
-        freeTrialLink.href = createWhatsAppUrl(
-            "Halo Kak, saya ingin klaim Free Trial 2 Hari. Apakah kuotanya masih tersedia?"
-        );
-
-        shopeeLink.href = storeConfig.shopee;
-
-        /* ===============================
-           TAHUN OTOMATIS
-        =============================== */
-
-        document.getElementById("year").textContent =
-            new Date().getFullYear();
-    </script>
-
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
